@@ -10,7 +10,7 @@
 <header th:fragment="nav" class="site-header">
     <div class="container nav">
         <a class="brand" th:href="@{/}">流浪动物救助平台</a>
-        <nav>
+        <nav class="main-menu">
             <a th:href="@{/animals}">动物公示</a>
             <a th:href="@{/rescue-cases}">救助案例</a>
             <a th:href="@{/rescue-cases/report}">提交线索</a>
@@ -21,16 +21,19 @@
     </div>
 </header>
 <header th:fragment="adminNav" class="site-header admin-header">
-    <div class="container nav">
-        <a class="brand" th:href="@{/admin}">救助平台后台</a>
-        <nav>
+    <div class="container admin-nav">
+        <div class="admin-brand-block">
+            <a class="brand admin-brand" th:href="@{/admin}">救助平台后台</a>
+            <span>信息维护与审核中心</span>
+        </div>
+        <nav class="admin-menu">
             <a th:href="@{/admin}">看板</a>
-            <a th:href="@{/admin/animals}">动物</a>
-            <a th:href="@{/admin/cases}">救助</a>
-            <a th:href="@{/admin/applications}">领养</a>
+            <a th:href="@{/admin/animals}">动物档案</a>
+            <a th:href="@{/admin/cases}">救助案例</a>
+            <a th:href="@{/admin/applications}">领养审核</a>
             <a th:href="@{/admin/volunteers}">志愿者</a>
-            <a th:href="@{/admin/donations}">捐赠</a>
-            <a th:href="@{/admin/logout}">退出</a>
+            <a th:href="@{/admin/donations}">捐赠公示</a>
+            <a class="logout-link" th:href="@{/admin/logout}">退出</a>
         </nav>
     </div>
 </header>
