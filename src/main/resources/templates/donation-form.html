@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head('爱心捐赠')"></head>
 <body>
-<div th:replace="fragments :: nav"></div>
+<div th:replace="fragments :: publicNav"></div>
 <main class="container">
     <section class="page-heading"><h1>爱心捐赠登记</h1><p>记录资金或物资捐赠，便于后台统一公示和统计。</p></section>
     <div class="alert success" th:if="${success}" th:text="${success}"></div>
@@ -21,3 +21,4 @@
 <div th:replace="fragments :: footer"></div>
 </body>
 </html>
+

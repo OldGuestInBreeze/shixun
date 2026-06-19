@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head(${animal.name} + ' - 动物详情')"></head>
 <body>
-<div th:replace="fragments :: nav"></div>
+<div th:replace="fragments :: publicNav"></div>
 <main class="container">
     <div class="alert success" th:if="${success}" th:text="${success}"></div>
     <section class="detail-layout">
@@ -26,3 +26,4 @@
 <div th:replace="fragments :: footer"></div>
 </body>
 </html>
+

@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head('动物信息公示')"></head>
 <body>
-<div th:replace="fragments :: nav"></div>
+<div th:replace="fragments :: publicNav"></div>
 <main class="container">
     <section class="page-heading"><h1>动物信息公示</h1><p>按名称、类别、品种、地点或状态检索救助站正在照护的动物。</p></section>
     <form class="search-bar" method="get" th:action="@{/animals}">
@@ -33,3 +33,4 @@
 <div th:replace="fragments :: footer"></div>
 </body>
 </html>
+

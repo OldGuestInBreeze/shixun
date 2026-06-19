@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head('领养申请')"></head>
 <body>
-<div th:replace="fragments :: nav"></div>
+<div th:replace="fragments :: publicNav"></div>
 <main class="container">
     <section class="page-heading"><h1 th:text="'申请领养 ' + ${animal.name}">申请领养</h1><p>请填写真实联系方式和领养理由，管理员审核后会联系您。</p></section>
     <form class="form-card" method="post" th:object="${application}" th:action="@{/adoptions/apply/{id}(id=${animal.id})}">
@@ -17,3 +17,4 @@
 <div th:replace="fragments :: footer"></div>
 </body>
 </html>
+

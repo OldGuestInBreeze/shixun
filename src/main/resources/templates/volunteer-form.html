@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head('志愿者报名')"></head>
 <body>
-<div th:replace="fragments :: nav"></div>
+<div th:replace="fragments :: publicNav"></div>
 <main class="container">
     <section class="page-heading"><h1>志愿者报名</h1><p>欢迎参与接送、喂养、摄影、宣传、领养回访等志愿服务。</p></section>
     <div class="alert success" th:if="${success}" th:text="${success}"></div>
@@ -17,3 +17,4 @@
 <div th:replace="fragments :: footer"></div>
 </body>
 </html>
+

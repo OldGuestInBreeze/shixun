@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
@@ -7,16 +7,23 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<header th:fragment="nav" class="site-header">
-    <div class="container nav">
-        <a class="brand" th:href="@{/}">流浪动物救助平台</a>
+<header th:fragment="publicNav" class="site-header public-header">
+    <div class="container nav public-nav">
+        <a class="brand public-brand" th:href="@{/}">
+            <span class="brand-mark">护</span>
+            <span class="brand-copy">
+                <strong>流浪动物救助平台</strong>
+                <small>Stray Animal Rescue</small>
+            </span>
+        </a>
         <nav class="main-menu">
+            <a th:href="@{/}">首页</a>
             <a th:href="@{/animals}">动物公示</a>
             <a th:href="@{/rescue-cases}">救助案例</a>
             <a th:href="@{/rescue-cases/report}">提交线索</a>
             <a th:href="@{/volunteers/apply}">志愿者</a>
             <a th:href="@{/donations/create}">爱心捐赠</a>
-            <a th:href="@{/admin}">后台管理</a>
+            <a class="admin-entry" th:href="@{/admin}">后台管理</a>
         </nav>
     </div>
 </header>
@@ -42,3 +49,5 @@
 </footer>
 </body>
 </html>
+
+
