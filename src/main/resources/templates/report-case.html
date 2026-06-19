@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('提交救助线索')"></head>
+<body>
+<div th:replace="fragments :: nav"></div>
+<main class="container">
+    <section class="page-heading"><h1>提交救助线索</h1><p>请尽量描述准确地点、动物状态和可联系信息。</p></section>
+    <div class="alert success" th:if="${success}" th:text="${success}"></div>
+    <form class="form-card" method="post" th:object="${caseForm}" th:action="@{/rescue-cases/report}">
+        <label>线索标题<input th:field="*{title}" required></label>
+        <label>动物称呼/类别<input th:field="*{animalName}"></label>
+        <label>发现地点<input th:field="*{location}" required></label>
+        <label>紧急程度
+            <select th:field="*{urgency}">
+                <option value="高">高</option><option value="中">中</option><option value="低">低</option>
+            </select>
+        </label>
+        <label>联系人<input th:field="*{contactName}"></label>
+        <label>联系电话<input th:field="*{contactPhone}"></label>
+        <label>情况描述<textarea th:field="*{description}" rows="5"></textarea></label>
+        <button class="button primary" type="submit">提交线索</button>
+    </form>
+</main>
+<div th:replace="fragments :: footer"></div>
+</body>
+</html>

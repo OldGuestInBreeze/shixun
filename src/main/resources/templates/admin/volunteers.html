@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('志愿者管理')"></head>
+<body>
+<div th:replace="fragments :: adminNav"></div>
+<main class="container">
+    <section class="page-heading"><h1>志愿者管理</h1><p>维护报名状态和后续联系进度。</p></section>
+    <table class="data-table">
+        <thead><tr><th>ID</th><th>姓名</th><th>电话</th><th>技能</th><th>时间</th><th>状态</th><th>操作</th></tr></thead>
+        <tbody>
+        <tr th:each="volunteer : ${volunteers}">
+            <td th:text="${volunteer.id}">1</td><td th:text="${volunteer.name}">姓名</td><td th:text="${volunteer.phone}">电话</td><td th:text="${volunteer.skill}">技能</td><td th:text="${volunteer.availableTime}">时间</td><td th:text="${volunteer.status}">待联系</td>
+            <td>
+                <form class="inline-form" method="post" th:action="@{/admin/volunteers/{id}/status(id=${volunteer.id})}">
+                    <select name="status"><option>待联系</option><option>已联系</option><option>已归档</option></select>
+                    <button class="button small" type="submit">更新</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

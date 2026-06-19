@@ -1,0 +1,14 @@
+@startuml
+actor "公众用户" as User
+boundary "adoption-form.html" as View
+control "PublicController" as Controller
+entity "AdoptionApplicationRepository" as Repo
+database "MySQL" as DB
+User -> View : 填写领养申请
+View -> Controller : POST /adoptions/apply/{animalId}
+Controller -> Repo : save(application)
+Repo -> DB : INSERT adoption_application
+DB --> Repo : success
+Repo --> Controller : success
+Controller --> View : 提示提交成功
+@enduml

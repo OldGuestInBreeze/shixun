@@ -1,0 +1,17 @@
+@startuml
+class Animal
+class RescueCase
+class AdoptionApplication
+class Volunteer
+class Donation
+class AdminUser
+class PublicController
+class AdminController
+class AnimalRepository
+class AdoptionApplicationRepository
+Animal "1" <-- "0..*" AdoptionApplication
+PublicController --> AnimalRepository
+PublicController --> AdoptionApplicationRepository
+AdminController --> AnimalRepository
+AdminController --> AdoptionApplicationRepository
+@enduml

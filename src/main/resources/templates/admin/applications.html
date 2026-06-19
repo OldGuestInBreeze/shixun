@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('领养申请审核')"></head>
+<body>
+<div th:replace="fragments :: adminNav"></div>
+<main class="container">
+    <section class="page-heading"><h1>领养申请审核</h1><p>审核公众提交的领养申请。</p></section>
+    <table class="data-table">
+        <thead><tr><th>ID</th><th>动物</th><th>申请人</th><th>电话</th><th>地址</th><th>经验/理由</th><th>状态</th><th>操作</th></tr></thead>
+        <tbody>
+        <tr th:each="app : ${applications}">
+            <td th:text="${app.id}">1</td><td th:text="${app.animal.name}">团团</td><td th:text="${app.applicantName}">申请人</td><td th:text="${app.phone}">电话</td><td th:text="${app.address}">地址</td>
+            <td><span th:text="${app.experience}">经验</span><br><span th:text="${app.reason}">理由</span></td><td th:text="${app.status}">待审核</td>
+            <td>
+                <form class="inline-form" method="post" th:action="@{/admin/applications/{id}/status(id=${app.id})}">
+                    <select name="status"><option>待审核</option><option>已通过</option><option>已拒绝</option></select>
+                    <button class="button small" type="submit">更新</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

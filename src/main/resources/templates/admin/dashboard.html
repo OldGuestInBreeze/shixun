@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('后台看板')"></head>
+<body>
+<div th:replace="fragments :: adminNav"></div>
+<main class="container">
+    <section class="page-heading"><h1>后台看板</h1><p>集中处理动物档案、救助案例、领养申请、志愿者报名和捐赠公示。</p></section>
+    <section class="stats-grid">
+        <article><strong th:text="${animalCount}">0</strong><span>动物档案</span></article>
+        <article><strong th:text="${waitingCount}">0</strong><span>待领养</span></article>
+        <article><strong th:text="${caseCount}">0</strong><span>进行中救助</span></article>
+        <article><strong th:text="${pendingCount}">0</strong><span>待审核申请</span></article>
+        <article><strong th:text="'¥' + ${donationTotal}">¥0</strong><span>捐赠总额</span></article>
+    </section>
+    <div class="admin-shortcuts">
+        <a class="button" th:href="@{/admin/animals}">维护动物档案</a>
+        <a class="button" th:href="@{/admin/cases}">维护救助案例</a>
+        <a class="button" th:href="@{/admin/applications}">审核领养申请</a>
+    </div>
+</main>
+</body>
+</html>

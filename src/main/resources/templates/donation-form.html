@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('爱心捐赠')"></head>
+<body>
+<div th:replace="fragments :: nav"></div>
+<main class="container">
+    <section class="page-heading"><h1>爱心捐赠登记</h1><p>记录资金或物资捐赠，便于后台统一公示和统计。</p></section>
+    <div class="alert success" th:if="${success}" th:text="${success}"></div>
+    <form class="form-card" method="post" th:object="${donation}" th:action="@{/donations/create}">
+        <label>捐赠人<input th:field="*{donorName}" required></label>
+        <label>捐赠类型
+            <select th:field="*{donationType}">
+                <option value="资金">资金</option><option value="物资">物资</option><option value="服务">服务</option>
+            </select>
+        </label>
+        <label>金额<input th:field="*{amount}" type="number" step="0.01" min="0"></label>
+        <label>说明<textarea th:field="*{message}" rows="4" placeholder="如：猫粮 10kg、猫砂 2 箱"></textarea></label>
+        <button class="button primary" type="submit">登记捐赠</button>
+    </form>
+</main>
+<div th:replace="fragments :: footer"></div>
+</body>
+</html>
