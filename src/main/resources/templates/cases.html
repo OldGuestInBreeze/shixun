@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('救助案例')"></head>
+<body>
+<div th:replace="fragments :: nav"></div>
+<main class="container">
+    <section class="page-heading with-action">
+        <div><h1>救助案例</h1><p>公开救助线索处理进度和志愿者协作情况。</p></div>
+        <a class="button primary" th:href="@{/rescue-cases/report}">提交救助线索</a>
+    </section>
+    <div class="timeline">
+        <article th:each="item : ${cases}">
+            <span class="tag" th:text="${item.urgency + '优先级'}">中优先级</span>
+            <h3 th:text="${item.title}">救助案例</h3>
+            <p><strong>动物：</strong><span th:text="${item.animalName}">幼猫</span></p>
+            <p><strong>地点：</strong><span th:text="${item.location}">地点</span></p>
+            <p><strong>状态：</strong><span th:text="${item.status}">处理中</span></p>
+            <p th:text="${item.description}">说明</p>
+        </article>
+    </div>
+</main>
+<div th:replace="fragments :: footer"></div>
+</body>
+</html>

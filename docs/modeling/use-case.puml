@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+actor "公众用户" as Public
+actor "管理员" as Admin
+rectangle "流浪动物救助智能信息公示平台" {
+  usecase "浏览动物信息" as UC1
+  usecase "提交领养申请" as UC2
+  usecase "提交救助线索" as UC3
+  usecase "志愿者报名" as UC4
+  usecase "登记捐赠" as UC5
+  usecase "登录后台" as UC6
+  usecase "维护动物档案" as UC7
+  usecase "审核领养申请" as UC8
+  usecase "维护救助案例" as UC9
+}
+Public --> UC1
+Public --> UC2
+Public --> UC3
+Public --> UC4
+Public --> UC5
+Admin --> UC6
+Admin --> UC7
+Admin --> UC8
+Admin --> UC9
+UC7 ..> UC6 : <<include>>
+UC8 ..> UC6 : <<include>>
+UC9 ..> UC6 : <<include>>
+@enduml
