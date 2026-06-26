@@ -9,11 +9,15 @@
         <thead><tr><th>ID</th><th>动物</th><th>申请人</th><th>电话</th><th>地址</th><th>经验/理由</th><th>状态</th><th>操作</th></tr></thead>
         <tbody>
         <tr th:each="app : ${applications}">
-            <td th:text="${app.id}">1</td><td th:text="${app.animal.name}">团团</td><td th:text="${app.applicantName}">申请人</td><td th:text="${app.phone}">电话</td><td th:text="${app.address}">地址</td>
+            <td th:text="${app.id}">1</td><td th:text="${app.animal != null ? app.animal.name : '未关联'}">团团</td><td th:text="${app.applicantName}">申请人</td><td th:text="${app.phone}">电话</td><td th:text="${app.address}">地址</td>
             <td><span th:text="${app.experience}">经验</span><br><span th:text="${app.reason}">理由</span></td><td th:text="${app.status}">待审核</td>
             <td>
                 <form class="inline-form" method="post" th:action="@{/admin/applications/{id}/status(id=${app.id})}">
-                    <select name="status"><option>待审核</option><option>已通过</option><option>已拒绝</option></select>
+                    <select name="status">
+                        <option value="待审核" th:selected="${app.status == '待审核'}">待审核</option>
+                        <option value="已通过" th:selected="${app.status == '已通过'}">已通过</option>
+                        <option value="已拒绝" th:selected="${app.status == '已拒绝'}">已拒绝</option>
+                    </select>
                     <button class="button small" type="submit">更新</button>
                 </form>
             </td>

@@ -10,6 +10,9 @@ import com.rescue.shixun.repository.AnimalRepository;
 import com.rescue.shixun.repository.DonationRepository;
 import com.rescue.shixun.repository.RescueCaseRepository;
 import com.rescue.shixun.repository.VolunteerRepository;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdminController {
+    private static final String APPLICATION_PENDING = "待审核";
+    private static final String APPLICATION_APPROVED = "已通过";
+    private static final String APPLICATION_REJECTED = "已拒绝";
+    private static final String ANIMAL_WAITING = "待领养";
+    private static final String ANIMAL_ADOPTED = "已领养";
+    private static final Set<String> APPLICATION_STATUSES = new HashSet<>(
+            Arrays.asList(APPLICATION_PENDING, APPLICATION_APPROVED, APPLICATION_REJECTED));
+
     private final AdminUserRepository users;
     private final AnimalRepository animals;
     private final RescueCaseRepository cases;
@@ -154,9 +165,22 @@ public class AdminController {
         if (!loggedIn(session)) {
             return "redirect:/admin/login";
         }
+        if (!APPLICATION_STATUSES.contains(status)) {
+            return "redirect:/admin/applications";
+        }
         applications.findById(id).ifPresent(application -> {
             application.setStatus(status);
             applications.save(application);
+            Animal animal = application.getAnimal();
+            if (animal != null) {
+                boolean hasApprovedApplication = applications.countByAnimalAndStatus(animal, APPLICATION_APPROVED) > 0;
+                if (hasApprovedApplication) {
+                    animal.setStatus(ANIMAL_ADOPTED);
+                } else if (ANIMAL_ADOPTED.equals(animal.getStatus())) {
+                    animal.setStatus(ANIMAL_WAITING);
+                }
+                animals.save(animal);
+            }
         });
         return "redirect:/admin/applications";
     }
