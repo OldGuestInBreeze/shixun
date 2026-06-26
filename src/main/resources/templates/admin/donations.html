@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('捐赠公示管理')"></head>
+<body>
+<div th:replace="fragments :: adminNav"></div>
+<main class="container">
+    <section class="page-heading"><h1>捐赠公示管理</h1><p>累计资金捐赠：<strong th:text="'¥' + ${donationTotal}">¥0</strong></p></section>
+    <table class="data-table">
+        <thead><tr><th>ID</th><th>捐赠人</th><th>类型</th><th>金额</th><th>说明</th><th>时间</th></tr></thead>
+        <tbody>
+        <tr th:each="donation : ${donations}">
+            <td th:text="${donation.id}">1</td><td th:text="${donation.donorName}">匿名</td><td th:text="${donation.donationType}">资金</td><td th:text="'¥' + ${donation.amount}">¥0</td><td th:text="${donation.message}">说明</td><td th:text="${#temporals.format(donation.createdAt, 'yyyy-MM-dd HH:mm')}">时间</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

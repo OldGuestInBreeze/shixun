@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('动物档案管理')"></head>
+<body>
+<div th:replace="fragments :: adminNav"></div>
+<main class="container">
+    <section class="page-heading"><h1>动物档案管理</h1><p>维护公示动物的基础信息、健康状态和领养状态。</p></section>
+    <form class="form-card two-column" method="post" th:object="${animal}" th:action="@{/admin/animals}">
+        <input type="hidden" th:field="*{id}">
+        <label>名称<input th:field="*{name}" required></label>
+        <label>类别<input th:field="*{species}" required></label>
+        <label>品种<input th:field="*{breed}"></label>
+        <label>性别<input th:field="*{gender}"></label>
+        <label>年龄<input th:field="*{age}" type="number" min="0"></label>
+        <label>状态
+            <select th:field="*{status}" required>
+                <option value="待救助">待救助</option><option value="康复中">康复中</option>
+                <option value="待领养">待领养</option><option value="已领养">已领养</option>
+            </select>
+        </label>
+        <label>健康情况<input th:field="*{healthStatus}"></label>
+        <label>所在地<input th:field="*{location}"></label>
+        <label class="full">图片 URL<input th:field="*{imageUrl}"></label>
+        <label class="full">描述<textarea th:field="*{description}" rows="4"></textarea></label>
+        <button class="button primary" type="submit">保存档案</button>
+        <a class="button" th:href="@{/admin/animals}">新增模式</a>
+    </form>
+    <table class="data-table">
+        <thead><tr><th>ID</th><th>名称</th><th>类别</th><th>状态</th><th>地点</th><th>操作</th></tr></thead>
+        <tbody>
+        <tr th:each="item : ${animals}">
+            <td th:text="${item.id}">1</td><td th:text="${item.name}">团团</td><td th:text="${item.species}">猫</td><td th:text="${item.status}">待领养</td><td th:text="${item.location}">地点</td>
+            <td class="actions">
+                <a class="text-link" th:href="@{/admin/animals(editId=${item.id})}">编辑</a>
+                <form method="post" th:action="@{/admin/animals/{id}/delete(id=${item.id})}">
+                    <button class="link-button" type="submit">删除</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

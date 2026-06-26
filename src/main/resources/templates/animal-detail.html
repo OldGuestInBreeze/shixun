@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head(${animal.name} + ' - 动物详情')"></head>
+<body>
+<div th:replace="fragments :: publicNav"></div>
+<main class="container">
+    <div class="alert success" th:if="${success}" th:text="${success}"></div>
+    <section class="detail-layout">
+        <img class="detail-image" th:src="${animal.imageUrl}" th:alt="${animal.name}">
+        <article class="detail-card">
+            <span class="tag" th:text="${animal.status}">待领养</span>
+            <h1 th:text="${animal.name}">团团</h1>
+            <dl class="info-list">
+                <dt>类别</dt><dd th:text="${animal.species}">猫</dd>
+                <dt>品种</dt><dd th:text="${animal.breed}">中华田园猫</dd>
+                <dt>性别</dt><dd th:text="${animal.gender}">雌</dd>
+                <dt>年龄</dt><dd th:text="${animal.age + ' 岁'}">1 岁</dd>
+                <dt>健康情况</dt><dd th:text="${animal.healthStatus}">健康</dd>
+                <dt>所在地</dt><dd th:text="${animal.location}">救助点</dd>
+            </dl>
+            <p th:text="${animal.description}">描述</p>
+            <a class="button primary" th:if="${animal.status == '待领养'}" th:href="@{/adoptions/apply/{id}(id=${animal.id})}">申请领养</a>
+        </article>
+    </section>
+</main>
+<div th:replace="fragments :: footer"></div>
+</body>
+</html>
+

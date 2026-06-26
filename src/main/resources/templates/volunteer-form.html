@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('志愿者报名')"></head>
+<body>
+<div th:replace="fragments :: publicNav"></div>
+<main class="container">
+    <section class="page-heading"><h1>志愿者报名</h1><p>欢迎参与接送、喂养、摄影、宣传、领养回访等志愿服务。</p></section>
+    <div class="alert success" th:if="${success}" th:text="${success}"></div>
+    <form class="form-card" method="post" th:object="${volunteer}" th:action="@{/volunteers/apply}">
+        <label>姓名<input th:field="*{name}" required></label>
+        <label>电话<input th:field="*{phone}" required></label>
+        <label>可提供技能<input th:field="*{skill}" placeholder="摄影、接送、文案、医疗协助等"></label>
+        <label>可服务时间<input th:field="*{availableTime}" placeholder="如：周末上午"></label>
+        <button class="button primary" type="submit">提交报名</button>
+    </form>
+</main>
+<div th:replace="fragments :: footer"></div>
+</body>
+</html>
+

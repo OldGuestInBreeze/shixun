@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('首页 - 流浪动物救助智能信息公示平台')"></head>
+<body>
+<div th:replace="fragments :: publicNav"></div>
+<main class="container">
+    <section class="hero">
+        <p class="eyebrow">Stray Animal Rescue</p>
+        <h1>让每一次救助都有记录，让每一份爱心被看见</h1>
+        <p>统一公示动物档案、救助进展、领养申请、志愿者参与和捐赠信息，帮助救助组织提升透明度与协作效率。</p>
+        <div class="hero-actions">
+            <a class="button primary" th:href="@{/animals}">查看待领养动物</a>
+            <a class="button" th:href="@{/rescue-cases/report}">提交救助线索</a>
+        </div>
+    </section>
+    <section class="stats-grid">
+        <article><strong th:text="${animalCount}">0</strong><span>动物档案</span></article>
+        <article><strong th:text="${waitingCount}">0</strong><span>待领养</span></article>
+        <article><strong th:text="${caseCount}">0</strong><span>进行中救助</span></article>
+        <article><strong th:text="${volunteerCount}">0</strong><span>志愿者</span></article>
+        <article><strong th:text="'¥' + ${donationTotal}">¥0</strong><span>累计捐赠</span></article>
+    </section>
+    <section class="section-title"><h2>推荐领养</h2><a th:href="@{/animals}">更多动物</a></section>
+    <div class="card-grid">
+        <article class="animal-card" th:each="animal,stat : ${animals}" th:if="${stat.index < 3}">
+            <img th:src="${animal.imageUrl}" th:alt="${animal.name}">
+            <div class="card-body">
+                <span class="tag" th:text="${animal.status}">待领养</span>
+                <h3 th:text="${animal.name}">团团</h3>
+                <p th:text="${animal.species + ' / ' + animal.breed + ' / ' + animal.location}">猫</p>
+                <a class="text-link" th:href="@{/animals/{id}(id=${animal.id})}">查看详情</a>
+            </div>
+        </article>
+    </div>
+    <section class="section-title"><h2>最新救助进展</h2><a th:href="@{/rescue-cases}">查看全部</a></section>
+    <div class="timeline">
+        <article th:each="item,stat : ${cases}" th:if="${stat.index < 3}">
+            <span class="tag" th:text="${item.urgency + '优先级'}">中优先级</span>
+            <h3 th:text="${item.title}">救助案例</h3>
+            <p th:text="${item.location + ' · ' + item.status}">地点</p>
+        </article>
+    </div>
+</main>
+<div th:replace="fragments :: footer"></div>
+</body>
+</html>
+
